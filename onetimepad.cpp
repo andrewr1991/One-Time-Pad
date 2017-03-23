@@ -30,7 +30,15 @@ int encrypt(string fileMsg) {
 	for (int i = 0; i < fileMsg.length(); i++) {
 		int r = rand() % 53 + 1;
 		int p = fileMsg[i];
-		int C = p + r;
+		int C;
+
+		if ((p + r) > 128) {
+			C = ((p + r) - 53);
+		}
+		else {
+			C = p + r;
+		}
+
 		encryptedMsg += C;
 
 		keyText += to_string(r) + " ";
