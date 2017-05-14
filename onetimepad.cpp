@@ -9,11 +9,11 @@ using namespace std;
 
 void encrypt() {
 	srand(time(NULL));
-  /*string file;
-  cout << "Enter a file name: ";
-  cin >> file;*/
+	string file;
+	cout << "Enter a file name: ";
+	cin >> file;
 
-  ifstream textIst{"text.txt"};
+	ifstream textIst{file};
 	ofstream encryptedOst{"encrypted.txt"};
 	ofstream keyOst{"key.txt"};
 	char c;
@@ -28,9 +28,8 @@ void encrypt() {
 		else {
 			C = c + r;
 		}
-		keyOst << r << "\n";
-		encryptedOst << (char)C;
-		cout << c << " " << (int)c << " " << r << " " << C << endl;
+	keyOst << r << "\n";
+	encryptedOst << (char)C;
 	}
 }
 
@@ -44,7 +43,6 @@ void decrypt() {
 
 	while (getline(keyIst, key) && encryptedIst.get(c)) {
 		k = stoi(key);
-		cout << c << " " << k << endl;
 		if ((c - k) < 32) {
 			c = 126 - (k - (c - 32));
 		}
@@ -58,5 +56,5 @@ void decrypt() {
 int main() {
 	encrypt();
 	decrypt();
-  return 0;
+	return 0;
 }
