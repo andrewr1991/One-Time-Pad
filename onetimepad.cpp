@@ -45,7 +45,7 @@ void decrypt() {
 	while (getline(keyIst, key) && encryptedIst.get(c)) {
 		k = stoi(key);
 		cout << c << " " << k << endl;
-		if (c < 100) {
+		if ((c - k) < 32) {
 			c = 126 - (k - (c - 32));
 		}
 		else {
