@@ -8,30 +8,33 @@
 using namespace std;
 
 int encrypt() {
-  string file;
-  cout << "Enter a file name: ";
-  cin >> file;
-
-  ifstream ist{file};
-
 	srand(time(NULL));
+  /*string file;
+  cout << "Enter a file name: ";
+  cin >> file;*/
 
-	while (!ist.oef()) {
-		int r = rand() % 53 + 1;
-		int p = fileMsg[i];
+  ifstream ist{"text.txt"};
+	ofstream encryptedOst{"encrypted.txt"};
+	ofstream keyOst{"key.txt"};
+	char c;
+
+	while (ist.get(c)) {
 		int C;
-
-		if ((p + r) > 128) {
-			C = ((p + r) - 53);
+		int r = rand() % 53 + 1;
+		if ((c + r) > 126) {
+			C = ((c + r) - 126);
+			C += 32;
 		}
 		else {
-			C = p + r;
+			C = c + r;
 		}
-
-		encryptedMsg += C;
+		keyOst << C << "\n";
+		encryptedOst << (char)C;
+		cout << c << " " << (int)c << " " << r << " " << C << endl;
 	}
 }
 
 int main() {
+	encrypt();
   return 0;
 }
